@@ -17,6 +17,7 @@ const nextConfig = {
       "paydisini.co.id",
       "api.qrispy.id",
       "api.dompetx.com",
+      "api.kallpolostore.id",
       ...(apiUrl ? [apiUrl] : []),
     ],
   },
@@ -26,7 +27,7 @@ const nextConfig = {
       {
         source: "/(.*)",
         headers: [
-          { key: "X-Powered-By", value: "PT. Ferdi Ananda Store" },
+          { key: "X-Powered-By", value: "Kallpolo" },
         ],
       },
     ];
