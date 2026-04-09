@@ -23,7 +23,7 @@ export function Footer() {
   const logoUrl = settings?.data?.["general.logo"];
   const logoTitle = settings?.data?.["general.title"];
 
-  const creditText = settings?.data?.["footer.credit_text"] || "Made With ❤️ by Achillstore";
+  const creditText = settings?.data?.["footer.credit_text"] || "Made With ❤️ by Kallpolostore";
 
   const extraTitle = settings?.data?.["footer.extra_section.title"] || "";
   const rawLinks = settings?.data?.["footer.extra_section.links"];
