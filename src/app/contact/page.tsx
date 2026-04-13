@@ -6,6 +6,7 @@ import { useSettings } from "@/context/settings-context";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Mail, MapPin, Phone } from "lucide-react"; 
 import {
   Select,
   SelectContent,
@@ -63,26 +64,63 @@ export default function Contact() {
   return (
     <ContentLayout title="Contact">
       <div className="min-h-screen py-5">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-10">
-            <div className="md:w-1/2 space-y-6">
+            {/* Bagian Informasi Kontak */}
+            <div className="md:w-1/2 space-y-8">
               <div className="space-y-4">
-                <h1 className="text-3xl font-bold">Hubungi Kami!</h1>
-                <p>
-                  Mengalami masalah dengan waktu transaksi?
-                  Silakan hubungi kami di bawah ini sesuai dengan kebutuhan Kamu!
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-my-color to-foreground bg-clip-text text-transparent">
+                  Hubungi Kami!
+                </h1>
+                <p className="text-muted-foreground text-lg">
+                  Mengalami masalah dengan transaksi atau butuh bantuan? 
+                  Silakan hubungi tim support kami melalui kontak resmi di bawah ini.
                 </p>
+              </div>
+
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-muted rounded-xl border">
+                    <Mail className="w-6 h-6 text-my-color" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Email Support</h3>
+                    <p className="text-muted-foreground">cs@kallpolostore.id</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-muted rounded-xl border">
+                    <Phone className="w-6 h-6 text-my-color" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">WhatsApp / Telp</h3>
+                    <p className="text-muted-foreground">+{waNumber || "0813-1016-5338"}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-muted rounded-xl border">
+                    <MapPin className="w-6 h-6 text-my-color" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">Alamat Usaha</h3>
+                    <p className="text-muted-foreground">
+                      Kp.Malaka II Jl.Rorotan VI RT12/RW05 Kec.Cilincing Kel.Rorotan Jakarta Utara 14140
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="md:w-1/2 bg-muted p-8 rounded-2xl shadow-md space-y-6 border">
+            {/* Bagian Form */}
+            <div className="md:w-1/2 bg-muted p-8 rounded-3xl shadow-lg space-y-6 border border-border/50">
               <div className="text-center space-y-2">
-                <h2 className="text-2xl font-semibold">
-                  Formulir Laporan / Permintaan
+                <h2 className="text-2xl font-bold">
+                  Formulir Laporan
                 </h2>
-                <p className="text-sm">
-                  Silahkan isi formulir di bawah ini untuk melaporkan masalah
-                  yang Kamu alami. Tim kami akan segera menindaklanjuti laporan Kamu.
+                <p className="text-sm text-muted-foreground">
+                  Isi formulir untuk respon cepat dari tim kami via WhatsApp.
                 </p>
               </div>
 
@@ -108,6 +146,7 @@ export default function Contact() {
                     placeholder="Nama Kamu"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    className="bg-background"
                   />
                   {errors.name && (
                     <p className="text-sm text-red-600 mt-1">{errors.name}</p>
@@ -120,6 +159,7 @@ export default function Contact() {
                     placeholder="Nomor WhatsApp"
                     value={whatsapp}
                     onChange={(e) => setWhatsapp(e.target.value)}
+                    className="bg-background"
                   />
                   {errors.whatsapp && (
                     <p className="text-sm text-red-600 mt-1">{errors.whatsapp}</p>
@@ -140,13 +180,13 @@ export default function Contact() {
 
                 <Button
                   onClick={handleSubmit}
-                  className="w-full bg-gradient-to-r from-my-color to-my-color font-bold hover:opacity-90 text-white"
+                  className="w-full bg-my-color font-bold hover:opacity-90 text-white h-12 rounded-xl"
                 >
-                  Kirim Pesan
+                  Kirim Pesan ke WhatsApp
                 </Button>
 
-                <p className="text-center text-sm text-muted-foreground">
-                  Klik tombol di atas untuk menghubungi kami via WhatsApp.
+                <p className="text-center text-xs text-muted-foreground">
+                  Aktif Setiap Hari pukul 09.00AM - 17.00PM WIB.
                 </p>
               </div>
             </div>
