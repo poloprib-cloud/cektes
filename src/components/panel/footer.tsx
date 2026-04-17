@@ -59,49 +59,69 @@ export function Footer() {
             <div>
               <h3 className="font-semibold">Menu</h3>
               <ul className="mt-3 space-y-2 text-sm opacity-80">
-                <li>
-                  <Link href="/">Beranda</Link>
-                </li>
-                <li>
-                  <Link href="/invoices">Cek Transaksi</Link>
-                </li>
-                <li>
-                  <Link href="/price-list">Daftar Harga</Link>
-                </li>
-                <li>
-                  <Link href="/artikel">Artikel</Link>
-                </li>
-                <li>
-                  <Link href="/ulasan-produk">Ulasan Produk</Link>
-                </li>
-                <li>
-                  <Link href="/contact">Hubungi Kami</Link>
-                </li>
+                <li><Link href="/">Beranda</Link></li>
+                <li><Link href="/invoices">Cek Transaksi</Link></li>
+                <li><Link href="/price-list">Daftar Harga</Link></li>
+                <li><Link href="/artikel">Artikel</Link></li>
+                <li><Link href="/ulasan-produk">Ulasan Produk</Link></li>
+                <li><Link href="/contact">Hubungi Kami</Link></li>
               </ul>
             </div>
 
             <div>
-  <h3 className="font-semibold">Ikuti Kami</h3>
-  <div className="mt-3 flex space-x-4">
-    {/* REVISI FACEBOOK: Tambahkan URL dasar facebook.com */}
-    <Link 
-      href={`https://facebook.com/${settings?.data?.["sosmed.fb"] || ""}`} 
-      target="_blank" 
-      rel="noreferrer"
-    >
-      <Facebook />
-    </Link>
+              <h3 className="font-semibold">Ikuti Kami</h3>
+              <div className="mt-3 flex space-x-4">
+                <Link 
+                  href={`https://facebook.com/${settings?.data?.["sosmed.fb"] || ""}`} 
+                  target="_blank" 
+                  rel="noreferrer"
+                >
+                  <Facebook />
+                </Link>
 
-    {/* REVISI INSTAGRAM: Tambahkan URL dasar instagram.com */}
-    <Link 
-      href={`https://instagram.com/${settings?.data?.["sosmed.ig"] || ""}`} 
-      target="_blank" 
-      rel="noreferrer"
-    >
-      <Instagram />
-    </Link>
-  </div>
-</div>
+                <Link 
+                  href={`https://instagram.com/${settings?.data?.["sosmed.ig"] || ""}`} 
+                  target="_blank" 
+                  rel="noreferrer"
+                >
+                  <Instagram />
+                </Link>
+              </div>
+            </div>
+          </div> {/* <--- TAG INI TADI KURANG / SALAH POSISI */}
+
+          {extraLinks.length > 0 && (
+            <div>
+              <h3 className="font-semibold">{extraTitle || "Lainnya"}</h3>
+              <ul className="mt-3 space-y-2 text-sm opacity-80">
+                {extraLinks.map((item, idx) => (
+                  <li key={`${item.url}-${idx}`}>
+                    <Link
+                      href={item.url}
+                      target={isExternal(item.url) ? "_blank" : undefined}
+                      rel={isExternal(item.url) ? "noreferrer" : undefined}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <div className="border-t border-white/20 my-6" />
+
+        <div className="flex flex-col md:flex-row justify-between items-center text-xs opacity-70">
+          <p>
+            © {new Date().getFullYear()} {settings?.data?.["general.title"] || "Penyedia layanan top up game & voucher terbaik."}. All rights reserved.
+          </p>
+          <p>{creditText}.</p>
+        </div>
+      </div>
+    </footer>
+  );
+}</div>
 
           {extraLinks.length > 0 && (
             <div>
