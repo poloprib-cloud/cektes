@@ -18,22 +18,22 @@ export function Footer() {
     };
   }
 
-  const settings = useSettings() as unknown as Settings | null;
+  const settings = useSettings() as any;
+  const data = settings?.data;
 
-  const logoUrl = settings?.data?.["general.logo"];
-  const logoTitle = settings?.data?.["general.title"];
-
-  const creditText = settings?.data?.["footer.credit_text"] || "Made With ❤️ by Kallpolostore";
-
-  const extraTitle = settings?.data?.["footer.extra_section.title"] || "";
-  const rawLinks = settings?.data?.["footer.extra_section.links"];
+  const logoUrl = data?.["general.logo"];
+  const logoTitle = data?.["general.title"];
+  const creditText = data?.["footer.credit_text"] || "Made With ❤️ by Kallpolostore";
+  const extraTitle = data?.["footer.extra_section.title"] || "";
+  const rawLinks = data?.["footer.extra_section.links"];
+  
   const extraLinks = Array.isArray(rawLinks)
     ? rawLinks
-        .map((x) => ({
+        .map((x: any) => ({
           label: (x?.label || "").trim(),
           url: (x?.url || "").trim(),
         }))
-        .filter((x) => x.label && x.url)
+        .filter((x: any) => x.label && x.url)
     : [];
 
   const isExternal = (url: string) => /^https?:\/\//i.test(url);
@@ -42,6 +42,7 @@ export function Footer() {
     <footer className="bg-secondary print:hidden text-secondary-foreground mt-16">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-6">
+          
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
               {logoUrl ? (
@@ -51,7 +52,7 @@ export function Footer() {
               )}
             </Link>
             <p className="text-sm leading-relaxed opacity-80">
-              {settings?.data?.["seo.description"] || "Penyedia layanan top up game & voucher terbaik."}
+              {data?.["seo.description"] || "Penyedia layanan top up game & voucher terbaik."}
             </p>
           </div>
 
@@ -72,7 +73,7 @@ export function Footer() {
               <h3 className="font-semibold">Ikuti Kami</h3>
               <div className="mt-3 flex space-x-4">
                 <Link 
-                  href={`https://facebook.com/${settings?.data?.["sosmed.fb"] || ""}`} 
+                  href={`https://facebook.com/${data?.["sosmed.fb"] || ""}`} 
                   target="_blank" 
                   rel="noreferrer"
                 >
@@ -80,7 +81,7 @@ export function Footer() {
                 </Link>
 
                 <Link 
-                  href={`https://instagram.com/${settings?.data?.["sosmed.ig"] || ""}`} 
+                  href={`https://instagram.com/${data?.["sosmed.ig"] || ""}`} 
                   target="_blank" 
                   rel="noreferrer"
                 >
@@ -88,13 +89,13 @@ export function Footer() {
                 </Link>
               </div>
             </div>
-          </div> {/* <--- TAG INI TADI KURANG / SALAH POSISI */}
+          </div>
 
           {extraLinks.length > 0 && (
             <div>
               <h3 className="font-semibold">{extraTitle || "Lainnya"}</h3>
               <ul className="mt-3 space-y-2 text-sm opacity-80">
-                {extraLinks.map((item, idx) => (
+                {extraLinks.map((item: any, idx: number) => (
                   <li key={`${item.url}-${idx}`}>
                     <Link
                       href={item.url}
@@ -114,40 +115,7 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center text-xs opacity-70">
           <p>
-            © {new Date().getFullYear()} {settings?.data?.["general.title"] || "Penyedia layanan top up game & voucher terbaik."}. All rights reserved.
-          </p>
-          <p>{creditText}.</p>
-        </div>
-      </div>
-    </footer>
-  );
-}</div>
-
-          {extraLinks.length > 0 && (
-            <div>
-              <h3 className="font-semibold">{extraTitle || "Lainnya"}</h3>
-              <ul className="mt-3 space-y-2 text-sm opacity-80">
-                {extraLinks.map((item, idx) => (
-                  <li key={`${item.url}-${idx}`}>
-                    <Link
-                      href={item.url}
-                      target={isExternal(item.url) ? "_blank" : undefined}
-                      rel={isExternal(item.url) ? "noreferrer" : undefined}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-
-        <div className="border-t border-white/20 my-6" />
-
-        <div className="flex flex-col md:flex-row justify-between items-center text-xs opacity-70">
-          <p>
-            © {new Date().getFullYear()} {settings?.data?.["general.title"] || "Penyedia layanan top up game & voucher terbaik."}. All rights reserved.
+            © {new Date().getFullYear()} {data?.["general.title"] || "Kallpolo Store"}. All rights reserved.
           </p>
           <p>{creditText}.</p>
         </div>
