@@ -81,17 +81,27 @@ export function Footer() {
             </div>
 
             <div>
-              <h3 className="font-semibold">Ikuti Kami</h3>
-              <div className="mt-3 flex space-x-4">
-                <Link href={settings?.data?.["sosmed.fb"] || "https://m.facebook.com/"} target="_blank" rel="noreferrer">
-                  <Facebook />
-                </Link>
-                <Link href={settings?.data?.["sosmed.ig"] || "https://instagram.com/"} target="_blank" rel="noreferrer">
-                  <Instagram />
-                </Link>
-              </div>
-            </div>
-          </div>
+  <h3 className="font-semibold">Ikuti Kami</h3>
+  <div className="mt-3 flex space-x-4">
+    {/* REVISI FACEBOOK: Tambahkan URL dasar facebook.com */}
+    <Link 
+      href={`https://facebook.com/${settings?.data?.["sosmed.fb"] || ""}`} 
+      target="_blank" 
+      rel="noreferrer"
+    >
+      <Facebook />
+    </Link>
+
+    {/* REVISI INSTAGRAM: Tambahkan URL dasar instagram.com */}
+    <Link 
+      href={`https://instagram.com/${settings?.data?.["sosmed.ig"] || ""}`} 
+      target="_blank" 
+      rel="noreferrer"
+    >
+      <Instagram />
+    </Link>
+  </div>
+</div>
 
           {extraLinks.length > 0 && (
             <div>
